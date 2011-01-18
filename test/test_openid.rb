@@ -310,6 +310,54 @@ describe "openid" do
     assert_equal 200, @response.status
   end
 
+  def test_with_ui_mode
+    @app = app(
+      :'ui[mode]' => 'popup'
+    )
+    process('/', :method => 'GET')
+
+    location = @response.headers['Location']
+    assert_match(/openid.ui.mode/, location)
+
+    follow_redirect!
+    assert_equal 200, @response.status
+    assert_equal 'GET', @response.headers['X-Method']
+    assert_equal '/', @response.headers['X-Path']
+    assert_equal 'success', @response.body
+  end
+
+  def test_with_ui_icon
+    @app = app(
+      :'ui[icon]' => 'http://example.com/favicon.png'
+    )
+    process('/', :method => 'GET')
+
+    location = @response.headers['Location']
+    assert_match(/openid.ui.icon/, location)
+
+    follow_redirect!
+    assert_equal 200, @response.status
+    assert_equal 'GET', @response.headers['X-Method']
+    assert_equal '/', @response.headers['X-Path']
+    assert_equal 'success', @response.body
+  end
+
+  def test_with_ui_lang
+    @app = app(
+      :'ui[lang]' => 'ja-JP'
+    )
+    process('/', :method => 'GET')
+
+    location = @response.headers['Location']
+    assert_match(/openid.ui.lang/, location)
+
+    follow_redirect!
+    assert_equal 200, @response.status
+    assert_equal 'GET', @response.headers['X-Method']
+    assert_equal '/', @response.headers['X-Path']
+    assert_equal 'success', @response.body
+  end
+
   def test_with_missing_id
     @app = app(:identifier => "#{RotsServerUrl}/john.doe")
     process('/', :method => 'GET')
