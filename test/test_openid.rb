@@ -328,7 +328,7 @@ describe "openid" do
 
   def test_with_ui_icon
     @app = app(
-      :'ui[icon]' => 'http://example.com/favicon.png'
+      :'ui[icon]' => true
     )
     process('/', :method => 'GET')
 
