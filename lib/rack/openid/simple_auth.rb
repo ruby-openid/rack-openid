@@ -1,5 +1,5 @@
-require 'rack/openid'
-require 'rack/request'
+require "rack/openid"
+require "rack/request"
 
 module Rack
   class OpenID
@@ -11,14 +11,16 @@ module Rack
     # SimpleAuth will automatically insert the required Rack::OpenID
     # middleware, so use Rack::OpenID is unnecessary.
     class SimpleAuth
-      def self.new(*args)
-        Rack::OpenID.new(super)
+      class << self
+        def new(*args)
+          Rack::OpenID.new(super)
+        end
       end
 
       attr_reader :app, :identifier
 
       def initialize(app, identifier)
-        @app        = app
+        @app = app
         @identifier = identifier
       end
 
@@ -27,7 +29,7 @@ module Rack
           app.call(env)
         elsif successful_response?(env)
           authenticate_session(env)
-          redirect_to requested_url(env)
+          redirect_to(requested_url(env))
         else
           authentication_request
         end
@@ -36,23 +38,23 @@ module Rack
       private
 
       def session(env)
-        env['rack.session'] || raise_session_error
+        env["rack.session"] || raise_session_error
       end
 
       def raise_session_error
-        raise RuntimeError, 'Rack::OpenID::SimpleAuth requires a session'
+        raise "Rack::OpenID::SimpleAuth requires a session"
       end
 
       def session_authenticated?(env)
-        session(env)['authenticated'] == true
+        session(env)["authenticated"] == true
       end
 
       def authenticate_session(env)
-        session(env)['authenticated'] = true
+        session(env)["authenticated"] = true
       end
 
       def successful_response?(env)
-        if resp = env[OpenID::RESPONSE]
+        if (resp = env[OpenID::RESPONSE])
           resp.status == :success && resp.display_identifier == identifier
         end
       end
@@ -63,15 +65,15 @@ module Rack
       end
 
       def redirect_to(url)
-        [303, {'Content-Type' => 'text/html', 'Location' => url}, []]
+        [303, {"Content-Type" => "text/html", "Location" => url}, []]
       end
 
       def authentication_request
-        [401, { OpenID::AUTHENTICATE_HEADER => www_authenticate_header }, []]
+        [401, {OpenID::AUTHENTICATE_HEADER => www_authenticate_header}, []]
       end
 
       def www_authenticate_header
-        OpenID.build_header(:identifier => identifier)
+        OpenID.build_header(identifier: identifier)
       end
     end
   end

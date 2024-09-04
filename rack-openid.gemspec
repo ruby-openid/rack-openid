@@ -1,4 +1,4 @@
-$LOAD_PATH.unshift File.expand_path("../lib", __FILE__)
+$LOAD_PATH.unshift(File.expand_path("../lib", __FILE__))
 require "rack/openid/version"
 
 Gem::Specification.new do |spec|
@@ -8,7 +8,16 @@ Gem::Specification.new do |spec|
   spec.authors = ["Peter Boling", "Michael Grosser", "Joshua Peek"]
   spec.email = "peter.boling@gmail.com"
   spec.homepage = "https://github.com/VitalConnectInc/#{spec.name}"
-  spec.files = `git ls-files lib`.split("\n")
+
+  # Specify which files should be added to the gem when it is released.
+  spec.files = Dir[
+    # Splats (alphabetical)
+    "lib/**/*.rb",
+    # Files (alphabetical)
+    "LICENSE.txt",
+    "README.md",
+  ]
+
   spec.license = "MIT"
   cert = File.expand_path("~/.ssh/gem-private-key-grosser.pem")
   if File.exist?(cert)

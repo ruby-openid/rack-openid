@@ -15,7 +15,7 @@ platform :mri do
   gem "byebug", ">= 11"
 end
 
-gem 'minitest'
-gem 'minitest-rg'
-gem 'rots', github: 'roman/rots'
-gem 'rack-session'
+gem "minitest"
+gem "minitest-rg"
+gem "rots", github: "roman/rots"
+gem "rack-session"
