@@ -18,8 +18,9 @@ MyApp = lambda do |env|
       ...
     when :failure
       ...
-  else
-    [401, {"WWW-Authenticate" => 'OpenID identifier="http://example.com/"'}, []]
+    else
+      [401, {"WWW-Authenticate" => 'OpenID identifier="http://example.com/"'}, []]
+    end
   end
 end
 
