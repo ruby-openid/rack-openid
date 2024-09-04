@@ -15,8 +15,8 @@ describe Rack::OpenID do
 
       call(params)
 
-      params["openid.sig"].must_equal "a+string+with+spaces"
-      params["openid.response_nonce"].must_equal "again+with+spaces!"
+      _(params["openid.sig"]).must_equal("a+string+with+spaces")
+      _(params["openid.response_nonce"]).must_equal("again+with+spaces!")
     end
   end
 end

@@ -112,7 +112,7 @@ describe "integration" do
     include RackTestHelpers
 
     it "with_get" do
-      @app = app
+      @app = app({})
       process('/', :method => 'GET')
       follow_redirect!
       assert_equal 200, @response.status
@@ -122,7 +122,7 @@ describe "integration" do
     end
 
     it "with_deprecated_identity" do
-      @app = app
+      @app = app({})
       process('/', :method => 'GET', :identity => "#{RotsServerUrl}/john.doe?openid.success=true")
       follow_redirect!
       assert_equal 200, @response.status
@@ -132,7 +132,7 @@ describe "integration" do
     end
 
     it "with_post_method" do
-      @app = app
+      @app = app({})
       process('/', :method => 'POST')
       follow_redirect!
       assert_equal 200, @response.status
@@ -291,7 +291,7 @@ describe "integration" do
     end
 
     it "with_inferred_realm" do
-      @app = app
+      @app = app({})
       process('/', :method => 'GET')
 
       location = @response.headers['Location']
@@ -321,7 +321,7 @@ describe "integration" do
     end
 
     it "sanitize_query_string" do
-      @app = app
+      @app = app({})
       process('/', :method => 'GET')
       follow_redirect!
       assert_equal 200, @response.status
@@ -330,7 +330,7 @@ describe "integration" do
     end
 
     it "passthrough_standard_http_basic_auth" do
-      @app = app
+      @app = app({})
       process('/', :method => 'GET', "MOCK_HTTP_BASIC_AUTH" => '1')
       assert_equal 401, @response.status
     end
@@ -340,7 +340,7 @@ describe "integration" do
     def app(options = {})
       options[:identifier] ||= "#{RotsServerUrl}/john.doe?openid.success=true"
 
-      app = lambda { |env|
+      rack_app = lambda { |env|
         if resp = env[Rack::OpenID::RESPONSE]
           headers = {
             'X-Path' => env['PATH_INFO'],
@@ -361,7 +361,7 @@ describe "integration" do
           [401, {Rack::OpenID::AUTHENTICATE_HEADER => Rack::OpenID.build_header(options)}, []]
         end
       }
-      Rack::Session::Pool.new(Rack::OpenID.new(app))
+      Rack::Session::Pool.new(Rack::OpenID.new(rack_app))
     end
   end
 
@@ -369,7 +369,7 @@ describe "integration" do
     include RackTestHelpers
 
     it "can login" do
-      @app = app "#{RotsServerUrl}/john.doe?openid.success=true"
+      @app = simple_app("#{RotsServerUrl}/john.doe?openid.success=true")
 
       process '/dashboard'
       follow_redirect!
@@ -384,7 +384,8 @@ describe "integration" do
     end
 
     it "fails login" do
-      @app = app "#{RotsServerUrl}/john.doe"
+      @app = simple_app("#{RotsServerUrl}/john.doe")
+      @app = simple_app("#{RotsServerUrl}/john.doe")
 
       process '/dashboard'
       follow_redirect!
@@ -393,10 +394,10 @@ describe "integration" do
 
     private
 
-    def app(identifier)
-      app = lambda { |env| [200, {'Content-Type' => 'text/html'}, ['Hello']] }
-      app = Rack::OpenID::SimpleAuth.new(app, identifier)
-      Rack::Session::Pool.new(app)
+    def simple_app(identifier)
+      rack_app = lambda { |env| [200, {'Content-Type' => 'text/html'}, ['Hello']] }
+      rack_app = Rack::OpenID::SimpleAuth.new(rack_app, identifier)
+      Rack::Session::Pool.new(rack_app)
     end
   end
 end
