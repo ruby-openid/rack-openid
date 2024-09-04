@@ -89,7 +89,7 @@ Authors
  - [Mike Dillon](https://github.com/md5)
  - [Richard Wilson](https://github.com/Senjai)
 
-[Michael Grosser](http://grosser.it)<br/>
-michael@grosser.it<br/>
-License: MIT<br/>
+[Michael Grosser](http://grosser.it)
+michael@grosser.it
+License: MIT
 
