@@ -134,7 +134,7 @@ module Rack
 
         url = open_id_redirect_url(req, oidreq, params)
         return redirect_to(url)
-      rescue ::OpenID::OpenIDError, Timeout::Error => e
+      rescue ::OpenID::OpenIDError, ::Timeout::Error
         env[RESPONSE] = MissingResponse.new
         return @app.call(env)
       end
@@ -302,7 +302,7 @@ module Rack
 
     def timeout_protection_from_identity_server
       yield
-    rescue Timeout::Error
+    rescue ::Timeout::Error
       TimeoutResponse.new
     end
   end
