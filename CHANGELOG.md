@@ -10,6 +10,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 ### Removed
 
+## 2.0.1 - 2024-09-05
+### Added
+- CHANGELOG.md
+- CODE_OF_CONDUCT.md
+- CONTRIBUTING.md
+- SECURITY.md
+### Fixed
+- Typo in gemspec description
+
 ## 2.0.0 - 2024-09-04
 COVERAGE:  97.72% -- 214/219 lines in 3 files
 BRANCH COVERAGE:  86.00% -- 43/50 branches in 3 branches
