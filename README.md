@@ -2,7 +2,7 @@
 
 Provides a more HTTPish API around the ruby-openid library.
 
-# Usage
+## Usage
 
 You trigger an OpenID request similar to HTTP authentication. From your app, return a "401 Unauthorized" and a "WWW-Authenticate" header with the identifier you would like to validate.
 
@@ -73,12 +73,10 @@ __END__
 </form>
 ```
 
+## TODO
 
-TODO
-====
- - 1 failing test (skipped)
- - rewrite tests with minitest/spec
-
+- 1 failing test (skipped)
+- rewrite tests with minitest/spec
 
 ## 🌈 Contributors
 
