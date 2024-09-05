@@ -7,7 +7,7 @@ Rack::OpenID::Version.send(:remove_const, :VERSION)
 Gem::Specification.new do |spec|
   spec.name = "rack-openid2"
   spec.version = gem_version
-  spec.summary = "Provides a more HTTPish API around the ruby-openid library"
+  spec.summary = "Provides a more HTTPish API around the ruby-openid2 library"
   spec.authors = ["Peter Boling", "Michael Grosser", "Joshua Peek"]
   spec.email = "peter.boling@gmail.com"
   spec.homepage = "https://github.com/VitalConnectInc/#{spec.name}"
