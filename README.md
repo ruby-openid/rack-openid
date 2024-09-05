@@ -105,6 +105,7 @@ Made with [contributors-img][🖐contrib-rocks].
 
 The gem is available as open source under the terms of
 the [MIT License][📄license] [![License: MIT][📄license-img]][📄license-ref].
+
 See [LICENSE.txt][📄license] for the official [Copyright Notice][📄copyright-notice-explainer].
 
 [comment]: <> ( 📄 LEGAL LINKS )
