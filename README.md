@@ -79,17 +79,39 @@ TODO
  - 1 failing test (skipped)
  - rewrite tests with minitest/spec
 
-Authors
-=======
 
-[Joshua Peek](https://github.com/josh) original author
+## 🌈 Contributors
 
-### [Contributors](https://github.com/grosser/rack-openid/contributors)
- - [Kenny Buckler](https://github.com/kbuckler)
- - [Mike Dillon](https://github.com/md5)
- - [Richard Wilson](https://github.com/Senjai)
+Current maintainer(s):
 
-[Michael Grosser](http://grosser.it)
-michael@grosser.it
-License: MIT
+- [Peter Boling](https://github.com/pboling)
 
+Special thanks to:
+- [Joshua Peek](https://github.com/josh) author of original `rack-openid`
+- [Michael Grosser](http://grosser.it) maintainer of original `rack-openid`
+
+and contributors to original `rack-openid`:
+- [Kenny Buckler](https://github.com/kbuckler)
+- [Mike Dillon](https://github.com/md5)
+- [Richard Wilson](https://github.com/Senjai)
+
+[![Contributors][🖐contributors-img]][🖐contributors]
+
+Made with [contributors-img][🖐contrib-rocks].
+
+[🖐contrib-rocks]: https://contrib.rocks
+[🖐contributors]: https://github.com/VitalConnectInc/rack-openid2/graphs/contributors
+[🖐contributors-img]: https://contrib.rocks/image?repo=VitalConnectInc/rack-openid2
+
+## 📄 License
+
+The gem is available as open source under the terms of
+the [MIT License][📄license] [![License: MIT][📄license-img]][📄license-ref].
+See [LICENSE.txt][📄license] for the official [Copyright Notice][📄copyright-notice-explainer].
+
+[comment]: <> ( 📄 LEGAL LINKS )
+
+[📄copyright-notice-explainer]: https://opensource.stackexchange.com/questions/5778/why-do-licenses-such-as-the-mit-license-specify-a-single-year
+[📄license]: LICENSE.txt
+[📄license-ref]: https://opensource.org/licenses/MIT
+[📄license-img]: https://img.shields.io/badge/License-MIT-green.svg
