@@ -20,13 +20,18 @@ Gem::Specification.new do |spec|
     "LICENSE.txt",
     "README.md",
   ]
+  spec.executables = spec.files.grep(%r{^bin/}).map { |f| File.basename(f) }
+  spec.licenses = ["MIT"]
+  spec.require_paths = ["lib"]
+  spec.required_ruby_version = ">= 2.7.0"
 
-  spec.license = "MIT"
-  cert = File.expand_path("~/.ssh/gem-private-key-grosser.pem")
-  if File.exist?(cert)
-    spec.signing_key = cert
-    spec.cert_chain = ["gem-public_cert.pem"]
-  end
+  spec.metadata["homepage_uri"] = spec.homepage
+  spec.metadata["source_code_uri"] = "#{spec.homepage}/tree/v#{spec.version}"
+  spec.metadata["changelog_uri"] = "#{spec.homepage}/blob/v#{spec.version}/CHANGELOG.md"
+  spec.metadata["bug_tracker_uri"] = "#{spec.homepage}/issues"
+  spec.metadata["documentation_uri"] = "https://www.rubydoc.info/gems/#{spec.name}/#{spec.version}"
+  spec.metadata["wiki_uri"] = "#{spec.homepage}/wiki"
+  spec.metadata["rubygems_mfa_required"] = "true"
 
   spec.add_dependency("rack", ">= 2.2")
   spec.add_dependency("ruby-openid2", ">= 3.0")
