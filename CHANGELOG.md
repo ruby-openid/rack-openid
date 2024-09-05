@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 ## 2.0.0 - 2024-09-04
+COVERAGE:  97.72% -- 214/219 lines in 3 files
+BRANCH COVERAGE:  86.00% -- 43/50 branches in 3 branches
 ### Changed
 - Upgraded to rack v2+
 - Switched ruby-openid => ruby-openid2
