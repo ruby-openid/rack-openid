@@ -1,9 +1,12 @@
-$LOAD_PATH.unshift(File.expand_path("../lib", __FILE__))
-require "rack/openid/version"
+# Get the GEMFILE_VERSION without *require* "my_gem/version", for code coverage accuracy
+# See: https://github.com/simplecov-ruby/simplecov/issues/557#issuecomment-825171399
+load "lib/rack/openid/version.rb"
+gem_version = Rack::OpenID::Version::VERSION
+Rack::OpenID::Version.send(:remove_const, :VERSION)
 
 Gem::Specification.new do |spec|
   spec.name = "rack-openid2"
-  spec.version = Rack::OpenID::VERSION
+  spec.version = gem_version
   spec.summary = "Provides a more HTTPish API around the ruby-openid library"
   spec.authors = ["Peter Boling", "Michael Grosser", "Joshua Peek"]
   spec.email = "peter.boling@gmail.com"

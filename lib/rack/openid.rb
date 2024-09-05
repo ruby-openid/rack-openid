@@ -1,12 +1,17 @@
+# External Libraries
+require "version_gem"
 require "rack/request"
 require "rack/utils"
-
+# Require ruby-openid2 and some of its extensions
 require "openid"
 require "openid/consumer"
 require "openid/extensions/sreg"
 require "openid/extensions/ax"
 require "openid/extensions/oauth"
 require "openid/extensions/pape"
+
+# This gem
+require_relative "openid/version"
 
 module Rack
   # A Rack middleware that provides a more HTTPish API around the
@@ -307,4 +312,8 @@ module Rack
       TimeoutResponse.new
     end
   end
+end
+
+Rack::OpenID::Version.class_eval do
+  extend VersionGem::Basic
 end

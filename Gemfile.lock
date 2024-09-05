@@ -7,7 +7,7 @@ GIT
 PATH
   remote: .
   specs:
-    rack-openid2 (1.4.2)
+    rack-openid2 (2.0.0)
       rack (>= 2.2)
       ruby-openid2 (>= 3.0)
       version_gem (~> 1.1, >= 1.1.4)
