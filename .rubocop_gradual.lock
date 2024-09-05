@@ -1,0 +1,5 @@
+{
+  "bin/bundle:4028066867": [
+    [64, 5, 20, "ThreadSafety/InstanceVariableInClassMethod: Avoid instance variables in class methods.", 2485198147]
+  ]
+}

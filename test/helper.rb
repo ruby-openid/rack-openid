@@ -1,9 +1,3 @@
-require "minitest/autorun"
-require "minitest/rg"
-require "net/http"
-
-require "rack"
-require "rack/session"
 require "rack/openid"
 require "rack/openid/simple_auth"
 

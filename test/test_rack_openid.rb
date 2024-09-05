@@ -1,4 +1,4 @@
-require File.expand_path("../helper", __FILE__)
+require_relative "test_helper"
 
 describe Rack::OpenID do
   describe ".sanitize_params!" do
