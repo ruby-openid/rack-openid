@@ -1,5 +1,5 @@
 GIT
-  remote: https://github.com/roman/rots
+  remote: https://github.com/VitalConnectInc/rots
   revision: d11e7d820fa8b9ad49aaca5b9317ec84f5a73b46
   specs:
     rots (0.2.2)
