@@ -21,8 +21,12 @@ Gem::Specification.new do |spec|
     # Splats (alphabetical)
     "lib/**/*.rb",
     # Files (alphabetical)
+    "CHANGELOG.md",
+    "CODE_OF_CONDUCT.md",
+    "CONTRIBUTING.md",
     "LICENSE.txt",
     "README.md",
+    "SECURITY.md"
   ]
   spec.executables = spec.files.grep(%r{^bin/}).map { |f| File.basename(f) }
   spec.licenses = ["MIT"]
