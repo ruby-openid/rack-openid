@@ -15,7 +15,4 @@ platform :mri do
   gem "byebug", ">= 11"
 end
 
-gem "minitest"
-gem "minitest-rg"
 gem "rots", github: "oauth-xx/rots"
-gem "rack-session"
