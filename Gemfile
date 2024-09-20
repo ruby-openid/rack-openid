@@ -17,5 +17,5 @@ end
 
 gem "minitest"
 gem "minitest-rg"
-gem "rots", github: "VitalConnectInc/rots"
+gem "rots", github: "oauth-xx/rots"
 gem "rack-session"
