@@ -42,7 +42,7 @@ Gem::Specification.new do |spec|
   spec.metadata["rubygems_mfa_required"] = "true"
 
   spec.add_dependency("rack", ">= 2.2")
-  spec.add_dependency("ruby-openid2", ">= 3.0")
+  spec.add_dependency("ruby-openid2", "~> 3.0", ">= 3.0.1")
   spec.add_dependency("version_gem", "~> 1.1", ">= 1.1.4")
 
   # Testing
