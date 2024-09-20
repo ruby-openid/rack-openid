@@ -1,5 +1,14 @@
 # External dependencies
 require "byebug" if ENV.fetch("DEBUG", "false").casecmp?("true")
+require "net/http"
+require "rack"
+require "rack/session"
+
+# testing libraries
+require "minitest/rg"
+
+# Test support
+require "support/logging"
 
 ## Last thing before loading this gem is to setup code coverage
 begin
@@ -11,12 +20,11 @@ rescue LoadError
   nil
 end
 
-# Testing libraries
+# Testing libraries that need to load after simplecov
 require "minitest/autorun"
-require "minitest/rg"
-require "net/http"
-require "rack"
-require "rack/session"
 
 # Internal dependencies & mixins
-require_relative "helper"
+require "rack/openid"
+require "rack/openid/simple_auth"
+
+OpenID::Util.logger = TestLogging::LOGGER

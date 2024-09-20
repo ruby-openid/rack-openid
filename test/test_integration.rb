@@ -1,3 +1,6 @@
+# External libraries
+require "rots"
+
 require_relative "test_helper"
 
 describe "integration" do
@@ -30,8 +33,6 @@ describe "integration" do
   ROTS_SERVER_URL = "http://localhost:9292"
 
   RotsApp = Rack::Builder.new do
-    require "rots"
-
     config = {
       "identity" => "john.doe",
       "sreg" => {
