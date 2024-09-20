@@ -1,1 +1,7 @@
 /doc/
+.env.local
+.yardoc/
+coverage/
+pkg/
+.bundle/
+.byebug_history
