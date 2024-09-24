@@ -54,7 +54,7 @@ module Rack
       end
 
       def successful_response?(env)
-        if (resp = env[OpenID::RESPONSE])
+        if (resp = env[Rack::OpenID::RESPONSE])
           resp.status == :success && resp.display_identifier == identifier
         end
       end
