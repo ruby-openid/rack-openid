@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.summary = "Provides a more HTTPish API around the ruby-openid2 library"
   spec.authors = ["Peter Boling", "Michael Grosser", "Joshua Peek"]
   spec.email = "peter.boling@gmail.com"
-  spec.homepage = "https://github.com/VitalConnectInc/#{spec.name}"
+  spec.homepage = "https://github.com/oauth-xx/#{spec.name}"
 
   # See CONTRIBUTING.md
   spec.cert_chain = [ENV.fetch("GEM_CERT_PATH", "certs/#{ENV.fetch("GEM_CERT_USER", ENV["USER"])}.pem")]

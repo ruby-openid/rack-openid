@@ -7,6 +7,6 @@ source "https://rubygems.org"
 # Exceptions, if any, will be found in gemfiles/*.gemfile
 gem "kettle-soup-cover", "~> 1.0", ">= 1.0.2"
 
-gem "rots", github: "VitalConnectInc/rots"
+gem "rots", github: "oauth-xx/rots"
 
 gemspec path: "../"

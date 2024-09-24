@@ -6,6 +6,6 @@ source "https://rubygems.org"
 # On CI we only need the gemspecs' dependencies (including development dependencies).
 # Exceptions, if any, will be found in gemfiles/*.gemfile
 
-gem "rots", github: "VitalConnectInc/rots"
+gem "rots", github: "oauth-xx/rots"
 
 gemspec path: "../"
