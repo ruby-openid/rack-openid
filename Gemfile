@@ -14,5 +14,3 @@ platform :mri do
   # Debugging
   gem "byebug", ">= 11"
 end
-
-gem "rots", github: "oauth-xx/rots"

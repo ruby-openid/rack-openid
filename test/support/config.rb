@@ -1,14 +1,15 @@
 # External dependencies
+require "require_bench" if ENV.fetch("REQUIRE_BENCH", "false").casecmp?("true")
 require "byebug" if ENV.fetch("DEBUG", "false").casecmp?("true")
 require "net/http"
 require "rack"
 require "rack/session"
 
-# testing libraries
+# External testing libraries
 require "minitest/rg"
 
 # Test support
-require "support/logging"
+require_relative "logging"
 
 ## Last thing before loading this gem is to setup code coverage
 begin
@@ -22,9 +23,18 @@ end
 
 # Testing libraries that need to load after simplecov
 require "minitest/autorun"
+require "minitest/focus"
 
-# Internal dependencies & mixins
-require "rack/openid"
-require "rack/openid/simple_auth"
+# rots depends on this library, but the tests here also depend on it,
+# so it needs to load after simplecov, in order to get accurate coverage of this gem,
+# since this gem is loaded by rots.
+require "rots"
+require "rots/mocks"
+require "rots/test"
 
 OpenID::Util.logger = TestLogging::LOGGER
+OpenID.fetcher = Rots::Mocks::Fetcher.new(Rots::Mocks::RotsServer.new)
+
+# This library
+require "rack-openid2"
+require "rack/openid/simple_auth"

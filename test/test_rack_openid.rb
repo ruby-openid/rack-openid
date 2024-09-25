@@ -1,4 +1,4 @@
-require_relative "test_helper"
+require_relative "support/config"
 
 describe Rack::OpenID do
   describe ".sanitize_params!" do

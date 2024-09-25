@@ -42,17 +42,25 @@ Gem::Specification.new do |spec|
   spec.metadata["rubygems_mfa_required"] = "true"
 
   spec.add_dependency("rack", ">= 2.2")
-  spec.add_dependency("ruby-openid2", "~> 3.0", ">= 3.0.1")
+  spec.add_dependency("ruby-openid2", "~> 3.1", ">= 3.1.0")
   spec.add_dependency("version_gem", "~> 1.1", ">= 1.1.4")
 
   # Testing
-  spec.add_development_dependency("minitest", ">= 5")
+  spec.add_development_dependency("minitest", ">= 5", "< 6") # Use assert_nil if expecting nil
+  spec.add_development_dependency("minitest-focus", "~> 1.4")
   spec.add_development_dependency("minitest-rg", ">= 5")
   spec.add_development_dependency("rack-session", ">= 2")
   spec.add_development_dependency("rake", ">= 13")
+  spec.add_development_dependency("rots", "~> 1.0")
+
+  # Test Logging
+  spec.add_development_dependency("logger", "~> 1.6", ">= 1.6.1")
 
   # Coverage
   spec.add_development_dependency("kettle-soup-cover", "~> 1.0", ">= 1.0.2")
+
+  # Debugging
+  spec.add_development_dependency("require_bench", "~> 1.0", ">= 1.0.4")
 
   # Linting
   spec.add_development_dependency("rubocop-lts", "~> 18.2", ">= 18.2.1")

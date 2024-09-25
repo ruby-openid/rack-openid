@@ -2,11 +2,10 @@ require "bundler/gem_tasks"
 
 require "rake/testtask"
 
+require "require_bench" if ENV.fetch("REQUIRE_BENCH", "false").casecmp?("true")
+
 desc "Run tests"
 Rake::TestTask.new("test") do |t|
-  t.libs << "lib"
-  t.libs << "test"
-  t.test_files = FileList["test/**/test_*.rb"]
   t.verbose = false
 end
 
@@ -40,4 +39,4 @@ rescue LoadError
   end
 end
 
-task default: %i[test rubocop_gradual yard yard:junk]
+task default: %i[test rubocop_gradual:autocorrect yard yard:junk]
