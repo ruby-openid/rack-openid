@@ -10,6 +10,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 ### Removed
 
+## 2.0.3 - 2024-09-25
+- COVERAGE:  97.72% -- 214/219 lines in 4 files
+- BRANCH COVERAGE:  86.00% -- 43/50 branches in 4 files
+- 39.13% documented
+### Added
+- Improved Documentation
+### Fixed
+- Documentation typos
+- Documentation in Yard (on RubyDoc.info)
+
 ## 2.0.2 - 2024-09-25
 - COVERAGE:  97.72% -- 214/219 lines in 4 files
 - BRANCH COVERAGE:  86.00% -- 43/50 branches in 4 files
