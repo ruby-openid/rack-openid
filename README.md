@@ -37,8 +37,6 @@
 [🖇kofi]: https://ko-fi.com/O5O86SNP4
 [🖇patreon-img]: https://img.shields.io/badge/patreon-donate-yellow.svg
 [🖇patreon]: https://patreon.com/galtzo
-[🖇buyme-img]: https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20latte&emoji=&slug=pboling&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff
-[🖇buyme]: https://www.buymeacoffee.com/pboling
 
 Provides a more HTTPish API around the ruby-openid library.
 
@@ -235,6 +233,15 @@ See [LICENSE.txt][📄license] for the official [Copyright Notice][📄copyright
 [📄license-ref]: https://opensource.org/licenses/MIT
 [📄license-img]: https://img.shields.io/badge/License-MIT-green.svg
 
+## 🤑 One more thing
+
 You made it to the bottom of the page!
+If you think maintaining this gem is more difficult than parsing a README,
+or if you think I've done a bang up job with this gem,
+please consider supporting my efforts via this link,
+or one of the others at the head.
 
 [![Buy me a latte][🖇buyme-img]][🖇buyme]
+
+[🖇buyme-img]: https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20latte&emoji=&slug=pboling&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff
+[🖇buyme]: https://www.buymeacoffee.com/pboling
