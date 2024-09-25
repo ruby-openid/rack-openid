@@ -38,7 +38,7 @@
 [🖇patreon-img]: https://img.shields.io/badge/patreon-donate-yellow.svg
 [🖇patreon]: https://patreon.com/galtzo
 
-Provides a more HTTPish API around the ruby-openid library.
+Provides a more HTTP-ish API around the ruby-openid library.
 
 ## Installation
 
