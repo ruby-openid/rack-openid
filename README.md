@@ -157,6 +157,8 @@ __END__
 [🐘ruby-mast-img]: https://img.shields.io/mastodon/follow/109447111526622197?domain=https%3A%2F%2Fruby.social&style=plastic&logo=mastodon&label=Ruby%20%40galtzo
 [🌳linktree]: https://linktr.ee/galtzo
 [🌳linktree-img]: https://img.shields.io/badge/galtzo-purple?style=plastic&logo=linktree
+[documentation]: http://rdoc.info/github/oauth-xx/rack-openid2/frames
+[homepage]: https://github.com/oauth-xx/rack-openid2
 
 <!-- Maintainer Contact Links -->
 [aboutme]: https://about.me/peter.boling
@@ -189,6 +191,44 @@ Made with [contributors-img][🖐contrib-rocks].
 [🖐contrib-rocks]: https://contrib.rocks
 [🖐contributors]: https://github.com/oauth-xx/rack-openid2/graphs/contributors
 [🖐contributors-img]: https://contrib.rocks/image?repo=oauth-xx/rack-openid2
+
+## 🪇 Code of Conduct
+
+Everyone interacting in this project's codebases, issue trackers,
+chat rooms and mailing lists is expected to follow the [code of conduct][🪇conduct].
+
+[🪇conduct]: CODE_OF_CONDUCT.md
+
+## 📌 Versioning
+
+This Library adheres to [Semantic Versioning 2.0.0][📌semver].
+Violations of this scheme should be reported as bugs.
+Specifically, if a minor or patch version is released that breaks backward compatibility,
+a new version should be immediately released that restores compatibility.
+Breaking changes to the public API will only be introduced with new major versions.
+
+To get a better understanding of how SemVer is intended to work over a project's lifetime,
+read this article from the creator of SemVer:
+
+- ["Major Version Numbers are Not Sacred"][📌major-versions-not-sacred]
+
+As a result of this policy, you can (and should) specify a dependency on these libraries using
+the [Pessimistic Version Constraint][📌pvc] with two digits of precision.
+
+For example:
+
+```ruby
+spec.add_dependency("rack-openid2", "~> 2.0")
+```
+
+See [CHANGELOG.md][📌changelog] for list of releases.
+
+[comment]: <> ( 📌 VERSIONING LINKS )
+
+[📌pvc]: http://guides.rubygems.org/patterns/#pessimistic-version-constraint
+[📌semver]: http://semver.org/
+[📌major-versions-not-sacred]: https://tom.preston-werner.com/2022/05/23/major-version-numbers-are-not-sacred.html
+[📌changelog]: CHANGELOG.md
 
 ## 📄 License
 
