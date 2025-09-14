@@ -1,12 +1,17 @@
-require 'rack/request'
-require 'rack/utils'
+# External Libraries
+require "version_gem"
+require "rack/request"
+require "rack/utils"
+# Require ruby-openid2 and some of its extensions
+require "openid"
+require "openid/consumer"
+require "openid/extensions/sreg"
+require "openid/extensions/ax"
+require "openid/extensions/oauth"
+require "openid/extensions/pape"
 
-require 'openid'
-require 'openid/consumer'
-require 'openid/extensions/sreg'
-require 'openid/extensions/ax'
-require 'openid/extensions/oauth'
-require 'openid/extensions/pape'
+# This gem
+require_relative "openid/version"
 
 module Rack
   # A Rack middleware that provides a more HTTPish API around the
@@ -19,38 +24,40 @@ module Rack
   # On competition, the OpenID response is automatically verified and
   # assigned to env["rack.openid.response"].
   class OpenID
-    # Helper method for building the "WWW-Authenticate" header value.
-    #
-    #   Rack::OpenID.build_header(:identifier => "http://josh.openid.com/")
-    #     #=> OpenID identifier="http://josh.openid.com/"
-    def self.build_header(params = {})
-      'OpenID ' + params.map { |key, value|
-        if value.is_a?(Array)
-          "#{key}=\"#{value.join(',')}\""
-        else
-          "#{key}=\"#{value}\""
-        end
-      }.join(', ')
-    end
-
-    # Helper method for parsing "WWW-Authenticate" header values into
-    # a hash.
-    #
-    #   Rack::OpenID.parse_header("OpenID identifier='http://josh.openid.com/'")
-    #     #=> {:identifier => "http://josh.openid.com/"}
-    def self.parse_header(str)
-      params = {}
-      if str =~ AUTHENTICATE_REGEXP
-        str = str.gsub(/#{AUTHENTICATE_REGEXP}\s+/, '')
-        str.split(', ').each { |pair|
-          key, *value = pair.split('=')
-          value = value.join('=')
-          value.gsub!(/^\"/, '').gsub!(/\"$/, "")
-          value = value.split(',')
-          params[key] = value.length > 1 ? value : value.first
-        }
+    class << self
+      # Helper method for building the "WWW-Authenticate" header value.
+      #
+      #   Rack::OpenID.build_header(:identifier => "http://josh.openid.com/")
+      #     #=> OpenID identifier="http://josh.openid.com/"
+      def build_header(params = {})
+        "OpenID " + params.map { |key, value|
+          if value.is_a?(Array)
+            "#{key}=\"#{value.join(",")}\""
+          else
+            "#{key}=\"#{value}\""
+          end
+        }.join(", ")
       end
-      params
+
+      # Helper method for parsing "WWW-Authenticate" header values into
+      # a hash.
+      #
+      #   Rack::OpenID.parse_header("OpenID identifier='http://josh.openid.com/'")
+      #     #=> {:identifier => "http://josh.openid.com/"}
+      def parse_header(str)
+        params = {}
+        if AUTHENTICATE_REGEXP.match?(str)
+          str = str.gsub(/#{AUTHENTICATE_REGEXP}\s+/o, "")
+          str.split(", ").each { |pair|
+            key, *value = pair.split("=")
+            value = value.join("=")
+            value.gsub!(/^\"/, "").gsub!(/\"$/, "")
+            value = value.split(",")
+            params[key] = (value.length > 1) ? value : value.first
+          }
+        end
+        params
+      end
     end
 
     class TimeoutResponse
@@ -108,8 +115,8 @@ module Rack
     private
 
     def sanitize_params!(params)
-      ['openid.sig', 'openid.response_nonce'].each do |param|
-        (params[param] || '').gsub!(' ', '+')
+      ["openid.sig", "openid.response_nonce"].each do |param|
+        (params[param] || "").tr!(" ", "+")
       end
     end
 
@@ -119,11 +126,11 @@ module Rack
       session = env["rack.session"]
 
       unless session
-        raise RuntimeError, "Rack::OpenID requires a session"
+        raise "Rack::OpenID requires a session"
       end
 
-      consumer   = ::OpenID::Consumer.new(session, @store)
-      identifier = params['identifier'] || params['identity']
+      consumer = ::OpenID::Consumer.new(session, @store)
+      identifier = params["identifier"] || params["identity"]
 
       begin
         oidreq = consumer.begin(identifier)
@@ -133,10 +140,10 @@ module Rack
         add_pape_fields(oidreq, params)
 
         url = open_id_redirect_url(req, oidreq, params)
-        return redirect_to(url)
-      rescue ::OpenID::OpenIDError, Timeout::Error => e
+        redirect_to(url)
+      rescue ::OpenID::OpenIDError, ::Timeout::Error
         env[RESPONSE] = MissingResponse.new
-        return @app.call(env)
+        @app.call(env)
       end
     end
 
@@ -145,7 +152,7 @@ module Rack
       session = env["rack.session"]
 
       unless session
-        raise RuntimeError, "Rack::OpenID requires a session"
+        raise "Rack::OpenID requires a session"
       end
 
       oidresp = timeout_protection_from_identity_server {
@@ -208,7 +215,6 @@ module Rack
       else
         scheme_with_host_and_port(req)
       end
-
     end
 
     def request_url(req)
@@ -225,11 +231,11 @@ module Rack
 
     def open_id_redirect_url(req, oidreq, options)
       trust_root = options["trust_root"]
-      return_to  = options["return_to"]
-      method     = options["method"]
-      immediate  = options["immediate"] == "true"
+      return_to = options["return_to"]
+      method = options["method"]
+      immediate = options["immediate"] == "true"
 
-      realm       = realm(req, options["realm_domain"])
+      realm = realm(req, options["realm_domain"])
       request_url = request_url(req)
 
       if return_to
@@ -240,20 +246,20 @@ module Rack
       end
 
       method = method.to_s.downcase
-      oidreq.return_to_args['_method'] = method unless method == "get"
+      oidreq.return_to_args["_method"] = method unless method == "get"
       oidreq.redirect_url(trust_root || realm, return_to || request_url, immediate)
     end
 
     def add_simple_registration_fields(oidreq, fields)
       sregreq = ::OpenID::SReg::Request.new
 
-      required = Array(fields['required']).reject(&URL_FIELD_SELECTOR)
+      required = Array(fields["required"]).reject(&URL_FIELD_SELECTOR)
       sregreq.request_fields(required, true) if required.any?
 
-      optional = Array(fields['optional']).reject(&URL_FIELD_SELECTOR)
+      optional = Array(fields["optional"]).reject(&URL_FIELD_SELECTOR)
       sregreq.request_fields(optional, false) if optional.any?
 
-      policy_url = fields['policy_url']
+      policy_url = fields["policy_url"]
       sregreq.policy_url = policy_url if policy_url
 
       oidreq.add_extension(sregreq)
@@ -262,8 +268,8 @@ module Rack
     def add_attribute_exchange_fields(oidreq, fields)
       axreq = ::OpenID::AX::FetchRequest.new
 
-      required = Array(fields['required']).select(&URL_FIELD_SELECTOR)
-      optional = Array(fields['optional']).select(&URL_FIELD_SELECTOR)
+      required = Array(fields["required"]).select(&URL_FIELD_SELECTOR)
+      optional = Array(fields["optional"]).select(&URL_FIELD_SELECTOR)
 
       if required.any? || optional.any?
         required.each do |field|
@@ -279,15 +285,15 @@ module Rack
     end
 
     def add_oauth_fields(oidreq, fields)
-      if (consumer = fields['oauth[consumer]']) && (scope = fields['oauth[scope]'])
-        oauthreq = ::OpenID::OAuth::Request.new(consumer, Array(scope).join(' '))
+      if (consumer = fields["oauth[consumer]"]) && (scope = fields["oauth[scope]"])
+        oauthreq = ::OpenID::OAuth::Request.new(consumer, Array(scope).join(" "))
         oidreq.add_extension(oauthreq)
       end
     end
 
     def add_pape_fields(oidreq, fields)
-      preferred_auth_policies = fields['pape[preferred_auth_policies]']
-      max_auth_age = fields['pape[max_auth_age]']
+      preferred_auth_policies = fields["pape[preferred_auth_policies]"]
+      max_auth_age = fields["pape[max_auth_age]"]
       if preferred_auth_policies || max_auth_age
         preferred_auth_policies = preferred_auth_policies.split if preferred_auth_policies.is_a?(String)
         pape_request = ::OpenID::PAPE::Request.new(preferred_auth_policies || [], max_auth_age)
@@ -296,14 +302,18 @@ module Rack
     end
 
     def default_store
-      require 'openid/store/memory'
+      require "openid/store/memory"
       ::OpenID::Store::Memory.new
     end
 
     def timeout_protection_from_identity_server
       yield
-    rescue Timeout::Error
+    rescue ::Timeout::Error
       TimeoutResponse.new
     end
   end
+end
+
+Rack::OpenID::Version.class_eval do
+  extend VersionGem::Basic
 end

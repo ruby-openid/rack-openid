@@ -1,5 +1,7 @@
 module Rack
   class OpenID
-    VERSION = "1.4.2"
+    module Version
+      VERSION = "2.0.3"
+    end
   end
 end
