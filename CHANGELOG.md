@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+
+- Added support for JRuby 10.1 and TruffleRuby 34.0.
+
 ### Changed
 ### Fixed
 ### Removed
